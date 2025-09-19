@@ -3,7 +3,6 @@
     <enableAccountScoreEnabled>false</enableAccountScoreEnabled>
     <enableActionableList>false</enableActionableList>
     <enableAppFrmAnywhereOrgPref>false</enableAppFrmAnywhereOrgPref>
-    <enableAppInviteOrgPref>false</enableAppInviteOrgPref>
     <enableCallReportAdminContextPref>false</enableCallReportAdminContextPref>
     <enableCompliantDataSharingForAccount>false</enableCompliantDataSharingForAccount>
     <enableCompliantDataSharingForBudget>false</enableCompliantDataSharingForBudget>
