@@ -60,7 +60,6 @@
     <isHighVolumePushbackEnabled>false</isHighVolumePushbackEnabled>
     <maxHoursAppInProgress>48</maxHoursAppInProgress>
     <recipeFiscalPref>false</recipeFiscalPref>
-    <replaceBlankMeasuresWithNulls>false</replaceBlankMeasuresWithNulls>
     <sonicEnabled>true</sonicEnabled>
     <turnOnTimeZones>false</turnOnTimeZones>
 </AnalyticsSettings>
