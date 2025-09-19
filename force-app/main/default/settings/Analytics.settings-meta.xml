@@ -49,12 +49,6 @@
     <enableSummaryFilterOrgPref>false</enableSummaryFilterOrgPref>
     <enableTableauHyperOutputConnector>false</enableTableauHyperOutputConnector>
     <enableUseOldChartsLookAndFeel>false</enableUseOldChartsLookAndFeel>
-    <enableWaveIndexMVDim>true</enableWaveIndexMVDim>
-    <enableWaveIndexMVDimV2>false</enableWaveIndexMVDimV2>
-    <enableWaveRecordNavigation>false</enableWaveRecordNavigation>
-    <enableWaveReplication>true</enableWaveReplication>
-    <enableWaveSharingInheritance>false</enableWaveSharingInheritance>
-    <enableWaveSqlCFIndexing>false</enableWaveSqlCFIndexing>
     <etlOrchestrationPref>false</etlOrchestrationPref>
     <isDiscoveryOptimizationEnabled>false</isDiscoveryOptimizationEnabled>
     <isHighVolumePushbackEnabled>false</isHighVolumePushbackEnabled>
