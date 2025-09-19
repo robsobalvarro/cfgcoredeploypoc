@@ -14,7 +14,6 @@
     <enableDiscoveryFrameworkMetadata>false</enableDiscoveryFrameworkMetadata>
     <enableDisplaySummaryOnTimeline>false</enableDisplaySummaryOnTimeline>
     <enableDontSharePartyprofWPortalOrgPref>false</enableDontSharePartyprofWPortalOrgPref>
-    <enableDropInAppointmentsOrgPref>false</enableDropInAppointmentsOrgPref>
     <enableEnhancedQuestionCreation>true</enableEnhancedQuestionCreation>
     <enableEnhancedUIForISPref>false</enableEnhancedUIForISPref>
     <enableFormFramework>false</enableFormFramework>
