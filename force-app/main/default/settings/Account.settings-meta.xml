@@ -5,6 +5,5 @@
     <enableAccountTeams>true</enableAccountTeams>
     <enableContactHistoryTracking>true</enableContactHistoryTracking>
     <enableRelateContactToMultipleAccounts>true</enableRelateContactToMultipleAccounts>
-    <enableReportsToOnPersonAccount>false</enableReportsToOnPersonAccount>
     <showViewHierarchyLink>true</showViewHierarchyLink>
 </AccountSettings>
