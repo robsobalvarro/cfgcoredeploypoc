@@ -4,11 +4,7 @@
 
 # Person Accounts Recipe
 # Generates 100 Person Accounts with first name, last name, and address
-# 3 Gift Transactions for each Person Account
-# 1 Gift Commitment with designation and schedule
-# 1 empty DonorGiftSummary per person
-
-## NOTE: You need at least 1 Gift Designation in the org before running this recipe.
+# Plus 3 Gift Transactions for each Person Account
 
 # To run this recipe:
 # cci task run generate_and_load_from_yaml -o generator_yaml PersonAccounts.recipe.yml --org [your_org_name]
@@ -33,6 +29,9 @@
     PersonMailingCountry:
       fake: country
     RecordType: PersonAccount
+    # Required field to create the PersonContact reference
+    #PersonContactId:
+     # Salesforce.SpecialObject: PersonContact
 
   # Generate 3 Gift Transactions for each Person Account
   friends:
@@ -66,6 +65,25 @@
           date_between:
             start_date: -2y
             end_date: today
+
+      # Generate 1 GiftTransactionDesignation for each GiftTransaction
+      friends:
+        - object: GiftTransactionDesignation
+          fields:
+            # Link to the GiftTransaction
+            GiftTransactionId:
+              reference: GiftTransaction
+
+            # Random GiftDesignation from Salesforce org
+            GiftDesignationId:
+              SalesforceQuery.random_record:
+                from: GiftDesignation
+
+            # Amount should match the OriginalAmount from GiftTransaction
+            Amount: ${{GiftTransaction.OriginalAmount}}
+
+            # Set percentage to 100%
+            Percent: 100
 
     # Generate 1 DonorGiftSummary for each Person Account
     - object: DonorGiftSummary
