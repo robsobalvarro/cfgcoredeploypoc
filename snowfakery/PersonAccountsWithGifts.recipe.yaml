@@ -1,0 +1,149 @@
+- snowfakery_version: 3
+- plugin: snowfakery.standard_plugins.Salesforce
+- plugin: snowfakery.standard_plugins.Salesforce.SalesforceQuery
+
+# Person Accounts Recipe
+# Generates 100 Person Accounts with first name, last name, and address
+# 3 Gift Transactions for each Person Account
+# 1 Gift Commitment with designation and schedule
+# 1 empty DonorGiftSummary per person
+
+## NOTE: You need at least 1 Gift Designation in the org before running this recipe.
+
+# To run this recipe:
+# cci task run generate_and_load_from_yaml -o generator_yaml PersonAccounts.recipe.yml --org [your_org_name]
+
+- object: Account
+  count: 100
+  fields:
+    # Person Account specific fields
+    FirstName:
+      fake: first_name
+    LastName:
+      fake: last_name
+    # Mailing address fields for Person Accounts
+    PersonMailingStreet:
+      fake: street_address
+    PersonMailingCity:
+      fake: city
+    PersonMailingState:
+      fake: state
+    PersonMailingPostalCode:
+      fake: postalcode
+    PersonMailingCountry:
+      fake: country
+    RecordType: PersonAccount
+
+  # Generate 3 Gift Transactions for each Person Account
+  friends:
+    - object: GiftTransaction
+      count: 3   ## crank this up to whatever number of gifts
+      fields:
+        # Generate transaction name with account name and random number
+        Name: TXNTEST-${{Account.FirstName}}_${{Account.LastName}}-${{fake.random_int(min=10000, max=99999999)}}
+
+        # Link to the Person Account as the donor
+        DonorId:
+          reference: Account
+
+        # Gift amount between $50-$200
+        OriginalAmount:
+          random_number:
+            min: 50
+            max: 200
+
+        # Payment method set to Check
+        PaymentMethod: Check
+
+        # Status set to Paid
+        Status: Paid
+
+        # Gift type set to Individual
+        GiftType: Individual
+
+        # Random transaction date within past 2 years
+        TransactionDate:
+          date_between:
+            start_date: -2y
+            end_date: today
+
+    # Generate 1 DonorGiftSummary for each Person Account
+    - object: DonorGiftSummary
+      fields:
+        # Link to the Person Account as the donor
+        DonorId:
+          reference: Account
+
+        # Set GiftsThisYearAmount to 0
+        GiftsThisYearAmount: 0
+
+    # Generate 1 GiftCommitment for each Person Account
+    - object: GiftCommitment
+      fields:
+        # Link to the Person Account as the donor
+        DonorId:
+          reference: Account
+
+        # Schedule type set to Recurring
+        ScheduleType: Recurring
+
+        # Expected total commitment amount - round thousands between $1000-$25000
+        ExpectedTotalCmtAmount:
+          random_choice:
+            - 1000
+            - 2000
+            - 3000
+            - 4000
+            - 5000
+            - 6000
+            - 7000
+            - 8000
+            - 9000
+            - 10000
+            - 12000
+            - 15000
+            - 18000
+            - 20000
+            - 25000
+
+        # Status set to Active
+        Status: Active
+
+        Name: COMMIT-${{Account.FirstName}}_${{Account.LastName}}-${{fake.random_int(min=10000, max=99999999)}}
+
+        # Effective start date - first day of current month
+        EffectiveStartDate: ${{fake.date_this_month(before_today=False, after_today=False).replace(day=1)}}
+
+      # Generate friends for each GiftCommitment
+      friends:
+        - object: GiftCommitmentSchedule
+          fields:
+            # Link to the GiftCommitment
+            GiftCommitmentId:
+              reference: GiftCommitment
+
+            # Start date - first day of current month
+            StartDate: ${{fake.date_this_month(before_today=False, after_today=False).replace(day=1)}}
+
+            # Transaction settings matching the screenshot
+            TransactionPeriod: Monthly
+            TransactionInterval: 1
+            TransactionAmount: 250.00
+            TransactionDay: 1
+
+            # Payment method
+            PaymentMethod: Check
+
+        - object: GiftDefaultDesignation
+          fields:
+            # Link to the GiftCommitment
+            ParentRecordId:
+              reference: GiftCommitment
+
+            # Random GiftDesignation from Salesforce org
+            GiftDesignationId:
+              SalesforceQuery.random_record:
+                from: GiftDesignation
+
+            # Set percentage to 100%
+            AllocatedPercentage: 100
