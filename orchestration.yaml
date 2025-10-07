@@ -1,17 +1,5 @@
 version: 1.0
 deployments:
-  - name: "Pre-Deployment Objects"
-    manifest: "manifest/01-objects.xml"
-    description: "Deploy custom objects first"
-
-  - name: "Profiles and Permission Sets"
-    manifest: "manifest/02-profiles.xml"
-    description: "Deploy security settings"
-
-  - name: "Apex Classes and Triggers"
-    manifest: "manifest/03-apex.xml"
-    description: "Deploy code components"
-
-  - name: "Flows and Process Builders"
-    manifest: "manifest/04-flows.xml"
-    description: "Deploy automation"
+  - name: "My cool Settings orchestration step"
+    manifest: "manifest/01-settings.xml"
+    description: "Deploy settings first"
