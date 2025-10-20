@@ -1,0 +1,9 @@
+version: 1.1
+deployments:
+  - name: "My cool Settings orchestration step"
+    manifest: "manifest/01-settings.xml"
+    description: "Deploy settings first"
+
+  - name: "another one"
+    manifest: "manifest/01-settings.xml"
+    description: "Deploy settings again"
