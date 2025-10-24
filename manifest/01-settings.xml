@@ -4,9 +4,5 @@
 		<members>*</members>
 		<name>Settings</name>
 	</types>
-	<types>
-		<members>*</members>
-		<name>FundraisingConfig</name>
-	</types>
 	<version>64.0</version>
 </Package>
