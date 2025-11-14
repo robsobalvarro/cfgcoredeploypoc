@@ -4,6 +4,6 @@ deployments:
     manifest: "manifest/01-settings.xml"
     description: "Deploy settings first"
 
-  - name: "My FundraisingConfig step"
-    manifest: "manifest/02-fundraisingconfigs.xml"
-    description: "Deploy fundraisingConfig"
+  - name: "My intermission"
+    intermission: "testIntermission.apex"
+    description: "Execute a test"
